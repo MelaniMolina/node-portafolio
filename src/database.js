@@ -1,6 +1,6 @@
 //Importacion de Mongoose
 const mongoose = require('mongoose')
-const MONGODB_URI = 'mongodb://0.0.0.0:27017'
+const MONGODB_URI = 'mongodb://0.0.0.0:27017/portafolio'
 
 connection = async()=>{
 

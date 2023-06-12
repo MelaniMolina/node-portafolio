@@ -7,6 +7,10 @@ const path = require('path');
 
 
 const { engine }  = require('express-handlebars')
+const methodOverride = require('method-override');
+
+
+
 //Inicializaciones
 const app = express()
 //Configuraciones
@@ -24,19 +28,18 @@ app.engine('.hbs',engine({
     extname:'.hbs'
 }))
 
+
+// Middlewares 
 app.set('view engine','.hbs')
 //En donde se espefica con que vamos a trabajar Middleware
 app.use(express.urlencoded({extended:false}))
-
+app.use(methodOverride('_method'))
 
 //Varibales locales
 
 //Rutas
+app.use(require('./routers/portafolio.routes'))
 
-
-app.get('/',(req,res)=>{
-    res.render('index')
-})
 
 //Archivos estaticos
 app.use(express.static(path.join(__dirname,'public')))
