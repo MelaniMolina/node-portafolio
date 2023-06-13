@@ -1,7 +1,10 @@
 const express = require('express')
 
+const passport = require('passport');
+const session = require('express-session');
 //pueden acceder a los directorios
 const path = require('path');
+require('./config/passport')
 
 //Requerimos los Handlebars
 
@@ -35,11 +38,24 @@ app.set('view engine','.hbs')
 app.use(express.urlencoded({extended:false}))
 app.use(methodOverride('_method'))
 
+
+
+app.use(session({ 
+    secret: 'secret',
+    resave:true,
+    saveUninitialized:true
+}));
+app.use(passport.initialize())
+app.use(passport.session())
+
+
+
 //Varibales locales
 
 //Rutas
 app.use(require('./routers/portafolio.routes'))
-
+// app.use(require('./routers/index.routes'))
+app.use(require('./routers/user.routes'))
 
 //Archivos estaticos
 app.use(express.static(path.join(__dirname,'public')))
