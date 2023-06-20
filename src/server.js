@@ -2,7 +2,10 @@ const express = require('express')
 
 const passport = require('passport');
 const session = require('express-session');
+
 //pueden acceder a los directorios
+
+const fileUpload = require('express-fileupload')
 const path = require('path');
 require('./config/passport')
 
@@ -31,6 +34,20 @@ app.engine('.hbs',engine({
     extname:'.hbs'
 }))
 
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : './uploads'
+}));
+
+
+
+
+// Variables globales
+app.use((req,res,next)=>{
+    res.locals.user = req.user?.name || null
+    next()
+})
+
 
 // Middlewares 
 app.set('view engine','.hbs')
@@ -49,8 +66,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-
-//Varibales locales
 
 //Rutas
 app.use(require('./routers/portafolio.routes'))
