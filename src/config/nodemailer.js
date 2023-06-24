@@ -20,7 +20,7 @@ module.exports.sendMailToUser = async(userMaila,token)=>{
     //DE 
     from: 'admin@esfot.com',
     //PARA
-    to: userMail,
+    to: userMaila,
     //Asunto
     subject: "Verifica tu cuenta de correo electrónico",
     //Cuerpo del email

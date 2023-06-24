@@ -33,6 +33,12 @@ const confirmEmail = async(req,res)=>{
     if(!(req.params.token)) return res.send("Lo sentimos, no se puede validar la cuenta")
     //Cargar el usuario en bas al token recptado
     const userBDD = await User.findOne({token:req.params.token})
+    
+     // Verificar si el usuario existe
+  if (!userBDD) {
+    return res.send("Lo sentimos, el token no es válido");
+  }
+    
     //Setear el token a null
     userBDD.token = null
     //Cambiar el email a true
