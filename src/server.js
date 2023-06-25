@@ -69,7 +69,7 @@ app.use(passport.session())
 
 //Rutas
 app.use(require('./routers/portafolio.routes'))
-// app.use(require('./routers/index.routes'))
+//app.use(require('./routers/index.routes'))
 app.use(require('./routers/user.routes'))
 
 //Archivos estaticos
